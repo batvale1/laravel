@@ -30,7 +30,7 @@ Route::group([
             ->name('index');
         Route::get('/{id}', 'NewsController@newsCategoriesList')
             ->name('CategoriesList');
-        Route::get('Card/{id}', 'NewsController@newsCard')
+        Route::get('card/{id}', 'NewsController@newsCard')
             ->name('newsCard');
 });
 
