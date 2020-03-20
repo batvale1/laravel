@@ -20,7 +20,8 @@ Route::get('/', 'HomeController@index')
 
 Route::get('/about', 'AboutController@index')
     ->name('about');
-
+Route::match(['get', 'post'],'/contactUs', 'ContactUsController@index')
+    ->name('contactUs');
 Route::group([
     'prefix' => 'news',
     'as' => 'news::'
@@ -30,7 +31,7 @@ Route::group([
             ->name('index');
         Route::get('/{id}', 'NewsController@newsCategoriesList')
             ->name('CategoriesList');
-        Route::get('Card/{id}', 'NewsController@newsCard')
+        Route::get('card/{id}', 'NewsController@newsCard')
             ->name('newsCard');
 });
 
