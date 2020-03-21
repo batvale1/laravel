@@ -20,7 +20,8 @@ Route::get('/', 'HomeController@index')
 
 Route::get('/about', 'AboutController@index')
     ->name('about');
-
+Route::match(['get', 'post'],'/contactUs', 'ContactUsController@index')
+    ->name('contactUs');
 Route::group([
     'prefix' => 'news',
     'as' => 'news::'
