@@ -31,7 +31,7 @@ Route::group([
             ->name('index');
         Route::get('/{id}', 'NewsController@newsCategoriesList')
             ->name('CategoriesList');
-        Route::get('card/{id}', 'NewsController@newsCard')
+        Route::get('card/{news}', 'NewsController@newsCard')
             ->name('newsCard');
 });
 
@@ -46,9 +46,47 @@ Route::group(
     ], function() {
         Route::get('/', 'NewsController@index')
             ->name('index');
-        Route::get('/createNews', 'NewsController@create')
+        Route::match(['get','post'], '/createNews', 'NewsController@create')
             ->name('create');
+        Route::match(['get','post'],'/updateNews/{id}', 'NewsController@update')
+            ->name('update');
+        Route::get('/deleteNews/{id}', 'NewsController@delete')
+            ->name('delete');
 });
+
+Route::group(
+    [
+        'prefix' => 'admin-categories',
+        'namespace' => 'Admin',
+        'as' => 'admin::categories::'
+    ], function() {
+    Route::get('/', 'CategoriesController@index')
+        ->name('index');
+    Route::match(['get','post'], '/createCategories', 'CategoriesController@create')
+        ->name('create');
+    Route::match(['get','post'],'/updateCategories/{id}', 'CategoriesController@update')
+        ->name('update');
+    Route::get('/deleteCategories/{id}', 'CategoriesController@delete')
+        ->name('delete');
+});
+
+Route::group(
+    [
+        'prefix' => 'admin-comments',
+        'namespace' => 'Admin',
+        'as' => 'admin::comments::'
+    ], function() {
+    Route::get('/', 'CommentsController@index')
+        ->name('index');
+    Route::match(['get','post'], '/createComments', 'CommentsController@create')
+        ->name('create');
+    Route::match(['get','post'],'/updateComments{id}', 'CommentsController@update')
+        ->name('update');
+    Route::get('/deleteNews/{id}', 'CommentsController@delete')
+        ->name('delete');
+});
+
+
 
 Route::group(
     [
