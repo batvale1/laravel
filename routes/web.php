@@ -35,7 +35,6 @@ Route::group([
             ->name('newsCard');
 });
 
-
 Route::get('/registration', 'RegistrationController@index')
     ->name('registration');
 
@@ -49,4 +48,14 @@ Route::group(
             ->name('index');
         Route::get('/createNews', 'NewsController@create')
             ->name('create');
+});
+
+Route::group(
+    [
+        'prefix' => 'test',
+        'namespace' => 'test',
+        'as' => 'test::'
+    ], function () {
+        Route::get('/db', 'DbController@index')
+            ->name('index');
 });
