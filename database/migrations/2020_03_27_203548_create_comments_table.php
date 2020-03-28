@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableNews extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateTableNews extends Migration
      */
     public function up()
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('cat_id')->index();
-            $table->foreign('cat_id')->references('id')->on('news_categories');
-            $table->string('short_desc', 100);
-            $table->string('full_desc');
+            $table->unsignedBigInteger('news_id')->index();
+            $table->string('user_text', 200);
+            $table->foreign('news_id')->references('id')->on('news');
             $table->boolean('active')->index();
             $table->timestamps();
         });
@@ -31,6 +30,6 @@ class CreateTableNews extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news');
+        Schema::dropIfExists('comments');
     }
 }

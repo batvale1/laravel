@@ -1,11 +1,11 @@
 @extends('layouts.main')
 
 @section('title')
-    @parent Создание новости
+    @parent Создание категории
 @endsection
 
 @section('content')
-    <form action='{{ route('admin::news::create') }}' method='post'>
+    <form action='{{ route('admin::categories::create') }}' method='post'>
         @csrf
         <label>
             Short desc:
@@ -14,10 +14,6 @@
         <label>
             Full desc:
             <input type='text' name="full_desc">
-        </label>
-        <label>
-            Category id:
-            <input type='number' name="cat_id">
         </label>
         <label for="">
             <input type="checkbox" name="active" value="1">

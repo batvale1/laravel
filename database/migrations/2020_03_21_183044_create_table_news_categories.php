@@ -16,7 +16,7 @@ class CreateTableNewsCategories extends Migration
         Schema::create('news_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('short_desc', 100)->unique();
-            $table->string('full_desc')->index();
+            $table->string('full_desc');
             $table->boolean('active')->index();
             $table->timestamps();
         });
