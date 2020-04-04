@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\AdminNewsEditRequest;
 use Illuminate\Http\Request;
 use App\Models\News;
 use App\Http\Controllers\Controller;
@@ -14,14 +15,20 @@ class NewsController extends Controller
     }
 
     function create(Request $request) {
+        $model = new News();
+        return view('admin/create', ['model' => $model]);
+    }
+
+    function save(AdminNewsEditRequest $request) {
         if ($request->isMethod('post')) {
             $model = new News();
             $model->fill($request->all());
             $model->save();
 
+            dd('here');
+
             return redirect()->route('admin::news::create');
         }
-        return view('admin/create');
     }
 
     function delete($id) {
