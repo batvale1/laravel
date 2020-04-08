@@ -24,9 +24,6 @@ class NewsController extends Controller
             $model = new News();
             $model->fill($request->all());
             $model->save();
-
-            dd('here');
-
             return redirect()->route('admin::news::create');
         }
     }

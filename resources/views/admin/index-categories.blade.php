@@ -20,8 +20,8 @@
 
     @forelse($categories as $item)
         <h2>{{ $item->short_desc }}</h2>
-        <h2><a style="text-decoration: none; font-size: 30px; background-color: darkgreen; color: white; padding: 10px" href="{{ route('admin::categories::update', $item->id) }}">Изменить</a></h2>
-        <h2><a style="text-decoration: none; font-size: 30px; background-color: darkred; color: white; padding: 10px" href="{{ route('admin::categories::delete', $item->id) }}">Удалить</a></h2>
+        <a class="btn" style="text-decoration: none; font-size: 30px; background-color: darkgreen; color: white; padding: 10px" href="{{ route('admin::categories::update', $item->id) }}">Изменить</a>
+        <a class="btn" style="text-decoration: none; font-size: 30px; background-color: darkred; color: white; padding: 10px" href="{{ route('admin::categories::delete', $item->id) }}">Удалить</a>
     @empty
         <h2>Nothing to show</h2>
     @endforelse

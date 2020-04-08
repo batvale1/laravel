@@ -11,12 +11,12 @@
 |
 */
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
-});*/
+});
 
-Route::get('/', 'HomeController@index')
-    ->name('home');
+/*Route::get('/', 'HomeController@index')
+    ->name('home');*/
 
 Route::get('/about', 'AboutController@index')
     ->name('about');
@@ -42,7 +42,9 @@ Route::group(
     [
         'prefix' => 'admin',
         'namespace' => 'Admin',
-        'as' => 'admin::news::'
+        'as' => 'admin::news::',
+        'middleware' => 'auth',
+        'middleware' => 'isAdmin'
     ], function() {
         Route::get('/', 'NewsController@index')
             ->name('index');
@@ -58,9 +60,34 @@ Route::group(
 
 Route::group(
     [
+        'prefix' => 'admin-profiles',
+        'namespace' => 'Admin',
+        'as' => 'admin::profiles::',
+        'middleware' => ['auth', 'isAdmin', 'editProfile']
+    ], function() {
+    Route::get('/', 'ProfilesController@index')
+        ->name('index');
+    Route::match(['get','post'],'/profiles/{id}', 'ProfilesController@update')
+        ->name('update');
+});
+
+Route::group(
+    [
+        'prefix' => 'admin',
+        'namespace' => 'Admin',
+        'as' => 'admin::profile::',
+        'middleware' => ['auth', 'editProfileSelf']
+    ], function() {
+    Route::match(['get','post'],'/update', 'ProfileController@update')
+        ->name('update');
+});
+
+Route::group(
+    [
         'prefix' => 'admin-categories',
         'namespace' => 'Admin',
-        'as' => 'admin::categories::'
+        'as' => 'admin::categories::',
+        'middleware' => 'isAdmin'
     ], function() {
     Route::get('/', 'CategoriesController@index')
         ->name('index');
@@ -76,7 +103,8 @@ Route::group(
     [
         'prefix' => 'admin-comments',
         'namespace' => 'Admin',
-        'as' => 'admin::comments::'
+        'as' => 'admin::comments::',
+        'middleware' => 'isAdmin'
     ], function() {
     Route::get('/', 'CommentsController@index')
         ->name('index');
@@ -99,3 +127,11 @@ Route::group(
         Route::get('/db', 'DbController@index')
             ->name('index');
 });
+
+/*Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');*/
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
