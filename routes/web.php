@@ -84,6 +84,42 @@ Route::group(
 
 Route::group(
     [
+        'prefix' => 'admin-parser',
+        'namespace' => 'Admin',
+        'as' => 'admin::parser::',
+        'middleware' => ['auth', 'isAdmin']
+    ], function() {
+    Route::get('/', 'ParserController@index')
+        ->name('index');
+    Route::post('/', 'ParserController@load')
+        ->name('load');
+});
+
+
+Route::group(
+    [
+        'prefix' => 'social',
+        'as' => 'social::',
+    ], function() {
+    Route::get('/login', 'SocialController@loginVk')
+        ->name('login-vk');
+    Route::get('/response', 'SocialController@responseVk')
+        ->name('response-vk');
+});
+
+Route::group(
+    [
+        'prefix' => 'social-fb',
+        'as' => 'social-fb::',
+    ], function() {
+    Route::get('/login', 'SocialAuthFacebookController@loginFb')
+        ->name('login-fb');
+    Route::get('/response', 'SocialAuthFacebookController@responseFb')
+        ->name('response-fb');
+});
+
+Route::group(
+    [
         'prefix' => 'admin-categories',
         'namespace' => 'Admin',
         'as' => 'admin::categories::',
@@ -115,8 +151,6 @@ Route::group(
     Route::get('/deleteNews/{id}', 'CommentsController@delete')
         ->name('delete');
 });
-
-
 
 Route::group(
     [
