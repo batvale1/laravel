@@ -34,12 +34,15 @@
                {{-- <li class='nav-item main-menu__list-item'><a href='{{route('registration')}}' class='nav-link main-menu__link'>Registration</a></li>--}}
                 <li class='nav-item main-menu__list-item'><a href='{{route('contactUs')}}' class='nav-link main-menu__link'>Contact Us</a></li>
                 @guest
+                    <li class='nav-item main-menu__list-item'><a href='{{route('social::login-vk')}}' class='nav-link main-menu__link'>Login VK</a></li>
+                    <li class='nav-item main-menu__list-item'><a href='{{route('social-fb::login-fb')}}' class='nav-link main-menu__link'>Login FB</a></li>
                 @else
                     @if (Auth::user()->is_admin)
                         <li class='nav-item main-menu__list-item'><a href='{{route('admin::news::index')}}' class='nav-link main-menu__link'>Admin news</a></li>
                         <li class='nav-item main-menu__list-item'><a href='{{route('admin::categories::index')}}' class='nav-link main-menu__link'>Admin categories</a></li>
                         <li class='nav-item main-menu__list-item'><a href='{{route('admin::comments::index')}}' class='nav-link main-menu__link'>Admin comments</a></li>
                         <li class='nav-item main-menu__list-item'><a href='{{route('admin::profiles::index')}}' class='nav-link main-menu__link'>Admin profiles</a></li>
+                        <li class='nav-item main-menu__list-item'><a href='{{route('admin::parser::index')}}' class='nav-link main-menu__link'>News parser</a></li>
                     @endif
                 @endguest
                 <!-- Authentication Links -->
