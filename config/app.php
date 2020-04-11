@@ -139,6 +139,8 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        Unisharp\Ckeditor\ServiceProvider::class,
+        Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
         Orchestra\Parser\XmlServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,

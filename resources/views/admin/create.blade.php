@@ -22,7 +22,7 @@
         </label>
         <label>
             Full desc:
-            <input type='text' name="full_desc" value="{{ $model->full_desc ?? old('full_desc') }}">
+            <textarea type='text' id="full-desc" name="full_desc">{{ $model->full_desc ?? old('full_desc') }}</textarea>
         </label>
         <label>
             Category id:
@@ -35,4 +35,13 @@
             <input type='submit' name='submit'>
         </label>
     </form>
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace('full-desc', {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token={{csrf_token()}}',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token={{csrf_token()}}'
+        } );
+    </script>
 @endsection
